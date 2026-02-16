@@ -4,9 +4,11 @@ from ultralytics import YOLO
 from PIL import Image, ImageDraw
 from name_dictionary import class_dict
 
-model = YOLO("yolo12n.pt")
+model = YOLO("yolo12l.pt")
 
-img = cv2.imread('img/vehicles.jpg') # Read the image with OpenCV and convert it into a BGR numpy array
+img = cv2.imread('img/cars.jpg') # Read the image with OpenCV and convert it into a BGR numpy array
+
+vehicle_count = 0
 
 objs = model.predict(img, 
                      conf=0.4, 
@@ -21,9 +23,12 @@ for obj in objs: # images
 
         x1, y1, x2, y2 = box.xyxy[0] # Get the coordinates of the objects (Tensor format)
 
-        x1, y1, x2, y2 = int (x1), int (y1), int (x2), int (y2) # Convert into integer
+        x1, y1, x2, y2 = int (x1), int (y1), int (x2), int (y2) # Convert to integer
 
         class_index = int (box.cls[0]) # box.cls[0] is float
+
+        if class_index in [2, 3, 5, 7]:
+            vehicle_count += 1
 
         name = class_dict[str(class_index)]
 
@@ -52,60 +57,11 @@ for obj in objs: # images
         
         img = cv2.cvtColor(np.array(pil_image), cv2.COLOR_RGB2BGR) # Convert the array back from Pillow to OpenCV
 
+
+
 cv2.imshow("Photo", img)
-while cv2.getWindowProperty("Photo", cv2.WND_PROP_VISIBLE) >= 1:
-    if cv2.waitKey(1) & 0b11111111 == ord('q'):
+print(f"{[vehicle_count]} car(s) detected")
+
+while cv2.getWindowProperty("Photo", cv2.WND_PROP_VISIBLE) >= 1: # If the window is opened 
+    if cv2.waitKey(1) & 0b1111_1111 == ord('q'):
         break
-
-
-
-
-
-
-        
-
-
-        
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
