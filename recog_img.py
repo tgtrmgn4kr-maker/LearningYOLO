@@ -61,7 +61,6 @@ while cv2.getWindowProperty("Photo", cv2.WND_PROP_VISIBLE) >= 1: # If the window
 
 
 
-
         
 
 
