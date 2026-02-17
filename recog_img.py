@@ -6,7 +6,7 @@ from name_dictionary import class_dict
 
 model = YOLO("yolo12n.pt")
 
-img = cv2.imread('img/face.png') # Read the image with OpenCV and convert it into a BGR numpy array
+img = cv2.imread('img/cars_tokyo.jpg') # Read the image with OpenCV and convert it to a BGR numpy array
 
 objs = model.predict(img, 
                      conf=0.4, 
@@ -54,57 +54,5 @@ for obj in objs: # images
 
 cv2.imshow("Photo", img)
 while cv2.getWindowProperty("Photo", cv2.WND_PROP_VISIBLE) >= 1: # If the window is opened 
-    if cv2.waitKey(1) & 0b11111111 == ord('q'):
+    if cv2.waitKey(1) & 0b1111_1111 == ord('q'):
         break
-
-
-
-
-
-        
-
-
-        
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
