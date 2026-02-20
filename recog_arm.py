@@ -17,12 +17,13 @@ def calc_angle(s, e, w):
     return angle_deg
 
 def draw_circle_label(frame, keypoint, point_id):
-    x, y = keypoint[0], keypoint[1]
+    x, y = int(keypoint[0]), int(keypoint[1])
     cv2.circle(frame,
                (x, y),
                5,
                (0, 255, 0),
-               -1)
+               -1
+               )
     
     cv2.putText(frame,
                 str(point_id),
@@ -30,7 +31,8 @@ def draw_circle_label(frame, keypoint, point_id):
                 0,
                 1,
                 (255, 0, 0),
-                2)
+                2
+                )
     
 def check_arm(frame, person, arm_index, is_down, count, position):
     shoulder = person[arm_index[0]]
@@ -62,7 +64,8 @@ def check_arm(frame, person, arm_index, is_down, count, position):
                 0,
                 3,
                 (0, 0, 255),
-                5)
+                5
+                )
     
     return is_down, count
 
